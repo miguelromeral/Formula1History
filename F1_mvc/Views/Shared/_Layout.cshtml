@@ -34,7 +34,31 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - MiguelRomeral. Data provided by <a href="https://ergast.com/mrd/">Ergast</a> </p>
+            <div>
+                <table>
+                    <tr>
+                        <td>
+                            <form action="https://twitter.com/MiguelRomeral" method="get">
+                                <button type="submit" class="btn btn-sm btn-info">Twitter</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="https://www.linkedin.com/in/miguelromeral/" method="get">
+                                <button type="submit" class="btn btn-sm btn-primary">LinkedIn</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="https://github.com/miguelromeral/" method="get">
+                                <button type="submit" class="btn btn-sm btn-default">GitHub</button>
+                            </form>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+            <div>
+                <p>&copy; @DateTime.Now.Year - <a href="https://www.linkedin.com/in/miguelromeral/">MiguelRomeral</a>. Data provided by <a href="https://ergast.com/mrd/">Ergast</a> </p>
+            </div>
         </footer>
     </div>
 
