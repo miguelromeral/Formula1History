@@ -1,0 +1,33 @@
+﻿@using F1_mvc.Models
+
+@model IEnumerable<seasons>
+
+@{
+    ViewBag.Title = "Season Calendar";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+
+
+    Choose one season.
+
+    <table>
+        <tr>
+            <th>Year</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@item.url">@item.year</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+
+
+
+<p>
+    @ViewBag.Returned
+</p>
