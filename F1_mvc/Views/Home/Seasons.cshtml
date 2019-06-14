@@ -11,18 +11,22 @@
 
     Choose one season.
 
-    <table>
-        <tr>
-            <th>Year</th>
-        </tr>
-        @foreach (var item in Model)
-        {
+    <table class="table table-hover">
+        <thead class="thead-dark">
             <tr>
-                <td>
-                    <a href="@item.url">@item.year</a>
-                </td>
+                <th scope="col">Year</th>
             </tr>
-        }
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr scope="row">
+                    <td>
+                        <a href="@item.url">@item.year</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
     </table>
 
 
