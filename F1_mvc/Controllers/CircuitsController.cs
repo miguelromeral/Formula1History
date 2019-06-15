@@ -14,16 +14,16 @@ namespace F1_mvc.Controllers
         // GET: Circuits
         public ActionResult Index()
         {
-            return View(db.circuits.OrderBy(x => x.name).ToList());
+            return View(db.circuits.OrderBy(x => x.country).ToList());
         }
 
-        public ActionResult Details(string circuitref)
+        public ActionResult Details(string id)
         {
-            if (circuitref == null || circuitref == "")
+            if (id == null || id == "")
                 return RedirectToAction("Index");
                 //throw new HttpException(404, "The track "+circuitref+" requested is not in the database.");
 
-            circuits r = db.circuits.Where(x => x.circuitRef == circuitref).FirstOrDefault();
+            circuits r = db.circuits.Where(x => x.circuitRef == id).FirstOrDefault();
             if(r == null)
                 return RedirectToAction("Index");
             //throw new HttpException(404, "The track "+circuitref+" requested is not in the database.");

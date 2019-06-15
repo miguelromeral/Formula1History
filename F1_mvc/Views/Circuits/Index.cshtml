@@ -6,38 +6,50 @@
 }
 
 <div class="jumbotron">
-    <h1>Circuits</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+    <h1><img src="~/images/streamline-icon-road-sign-left-reverse-turn-ahead-alternate@48x48.png" class="d-inline-block"/> Circuits</h1>
+    <p class="lead">Every F1 track where a Grand Prix has been took place.</p>
 </div>
 
-<table class="table table-hover">
+<table class="table table-hover" id="tableCircuits">
     <thead class="thead-dark">
         <tr>
             <th scope="col">@Html.DisplayNameFor(model => model.name)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.location)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.country)</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-        <tr scope="row">
-            <td>@Html.ActionLink(item.name, "details", new { controller = "circuits", circuitref = item.circuitRef })</td>
-            <td>@Html.ActionLink(item.name, "details", "circuits", new { circuitref = item.circuitRef }, null) </td>
-
-            @*<td>@Html.ActionLink(</td>*@
-
-            <td>
-                @Html.ActionLink(
-                    linkText: item.name,
-                    actionName: "details",
-                    controllerName: "circuits",
-                    routeValues: new {
-                        circuitref = item.circuitRef
-                    },
-                    htmlAttributes: null
-                )
-            </td>
-        </tr>
+            <tr scope="row">
+                <td>@Html.ActionLink(item.name, "details", "circuits", new { id = item.circuitRef }, null)</td>
+                <td>@item.location</td>
+                <td>@item.country</td>
+            </tr>
         }
     </tbody>
 </table>
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+
+        // Basic example
+        $(document).ready(function () {
+            $('#tableCircuits').DataTable({
+                "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+
+}

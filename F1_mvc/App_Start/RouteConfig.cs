@@ -18,6 +18,12 @@ namespace F1_mvc
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            routes.MapRoute(
+                name: "CircuitDetails",
+                url: "circuit/details/{circuitref}",
+                defaults: new { controller = "Circuit", action = "Details" },
+                constraints: new { circuitref = "[a-zA-Z]+" }
+            );
         }
     }
 }
