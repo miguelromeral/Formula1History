@@ -19,7 +19,18 @@ namespace F1_mvc.Controllers
 
         public ActionResult Details(string circuitref)
         {
-            return RedirectToAction("Index");
+            if (circuitref == null || circuitref == "")
+                return RedirectToAction("Index");
+                //throw new HttpException(404, "The track "+circuitref+" requested is not in the database.");
+
+            circuits r = db.circuits.Where(x => x.circuitRef == circuitref).FirstOrDefault();
+            if(r == null)
+                return RedirectToAction("Index");
+            //throw new HttpException(404, "The track "+circuitref+" requested is not in the database.");
+
+            ViewBag.Title = r.name;
+
+            return View(r);
         }
 
 

@@ -21,7 +21,22 @@
         @foreach (var item in Model)
         {
         <tr scope="row">
-            <td>@Html.ActionLink(item.name, "details", new { controller = "circuits", id = item.circuitRef })</td>
+            <td>@Html.ActionLink(item.name, "details", new { controller = "circuits", circuitref = item.circuitRef })</td>
+            <td>@Html.ActionLink(item.name, "details", "circuits", new { circuitref = item.circuitRef }, null) </td>
+
+            @*<td>@Html.ActionLink(</td>*@
+
+            <td>
+                @Html.ActionLink(
+                    linkText: item.name,
+                    actionName: "details",
+                    controllerName: "circuits",
+                    routeValues: new {
+                        circuitref = item.circuitRef
+                    },
+                    htmlAttributes: null
+                )
+            </td>
         </tr>
         }
     </tbody>

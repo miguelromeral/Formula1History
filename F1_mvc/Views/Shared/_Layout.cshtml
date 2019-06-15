@@ -3,9 +3,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @RenderSection("googlemaps", required: false)
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -28,6 +29,21 @@
                 </ul>
             </div>
         </div>
+    </div>
+
+    <div class="container center-block">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <table>
+                <tr>
+                    <td>
+                        <img src="~/images/219.svg" width="16" height="16" />
+                    </td>
+                    <td><strong> Work in progress</strong></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4"></div>
     </div>
 
 
