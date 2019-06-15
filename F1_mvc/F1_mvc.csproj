@@ -128,12 +128,25 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CircuitsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\circuits.cs" />
+    <Compile Include="Models\constructorResults.cs" />
+    <Compile Include="Models\constructors.cs" />
+    <Compile Include="Models\constructorStandings.cs" />
+    <Compile Include="Models\drivers.cs" />
+    <Compile Include="Models\driverStandings.cs" />
+    <Compile Include="Models\lapTimes.cs" />
     <Compile Include="Models\ModelF1.cs" />
+    <Compile Include="Models\pitStops.cs" />
+    <Compile Include="Models\qualifying.cs" />
+    <Compile Include="Models\races.cs" />
+    <Compile Include="Models\results.cs" />
     <Compile Include="Models\seasons.cs" />
+    <Compile Include="Models\status.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -173,6 +186,7 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Seasons.cshtml" />
+    <Content Include="Views\Circuits\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

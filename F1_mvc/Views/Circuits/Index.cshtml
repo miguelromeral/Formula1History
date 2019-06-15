@@ -1,0 +1,28 @@
+﻿@using F1_mvc.Models
+@model IEnumerable<circuits>
+
+@{
+    ViewBag.Title = "Circuits";
+}
+
+<div class="jumbotron">
+    <h1>Circuits</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">@Html.DisplayNameFor(model => model.name)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr scope="row">
+            <td>@Html.ActionLink(item.name, "details", new { controller = "circuits", id = item.circuitRef })</td>
+        </tr>
+        }
+    </tbody>
+</table>

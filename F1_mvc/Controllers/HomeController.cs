@@ -11,7 +11,7 @@ namespace F1_mvc.Controllers
 {
     public class HomeController : Controller
     {
-        private ModelF1 db = new ModelF1();
+        internal static ModelF1 db = new ModelF1();
 
         public ActionResult Index()
         {
