@@ -6,34 +6,18 @@
 }
 
 <div class="jumbotron">
-    
+
     <h1><img src="~/images/streamline-icon-sports-car-convertible@48x48.png" class="d-inline-block" />@ViewBag.Title</h1>
     <p class="lead">Every Grand Prix in the whole history.</p>
 </div>
 
-<table class="table table-hover" id="tableCircuits">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">@Html.DisplayNameFor(model => model.name)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.year)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.round)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.date)</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.time)</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr scope="row">
-            <td>@Html.ActionLink(item.name, "details", "races", new { id = item.raceId }, null)</td>
-            <td>@item.year</td>
-            <td>@item.round</td>
-            <td>@item.date.ToShortDateString()</td>
-            <td>@item.time</td>
-        </tr>
-        }
-    </tbody>
-</table>
+
+@Html.Action("GridRace", "Races")
+
+
+
+
+
 
 @section scripts {
 
@@ -49,9 +33,9 @@
 
         // Basic example
         $(document).ready(function () {
-            $('#tableCircuits').DataTable({
+            $('#tableRaces').DataTable({
                 "pagingType": "simple", // "simple" option for 'Previous' and 'Next' buttons only
-                "order" : [[4, "asc"]]
+                "order": [[4, "asc"]]
             });
             $('.dataTables_length').addClass('bs-select');
         });

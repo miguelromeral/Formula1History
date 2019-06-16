@@ -11,7 +11,7 @@
     <p class="lead">The drivers who have been on a F1 race ever.place.</p>
 </div>
 
-<table class="table table-hover" id="tableCircuits">
+<table class="table table-hover" id="tableDrivers">
     <thead class="thead-dark">
         <tr>
             <th scope="col">Driver</th>
@@ -43,8 +43,8 @@
 
         // Basic example
         $(document).ready(function () {
-            $('#tableCircuits').DataTable({
-                "pagingType": "simple" // "simple" option for 'Previous' and 'Next' buttons only
+            $('#tableDrivers').DataTable({
+                "pagingType": "full_numbers" // "simple" option for 'Previous' and 'Next' buttons only
             });
             $('.dataTables_length').addClass('bs-select');
         });

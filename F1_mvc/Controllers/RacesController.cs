@@ -63,8 +63,28 @@ namespace F1_mvc.Controllers
             return PartialView("_RaceDetails", stats);
         }
 
+        
+        [ActionName("GridRace")]
+        public PartialViewResult GridRace()
+        {
+            return PartialView("_GridRace", db.races.OrderBy(x => x.date).ToList());
+        }
 
+        [ActionName("GridRaceDriver")]
+        public PartialViewResult GridRace(string id)
+        {
+            var dri = DriversController.GetDriverByRef(id);
+            if (dri == null)
+                throw new HttpException(404, "The driver " + id + " requested is not in the database.");
 
+            var q = from rac in db.races
+                    join res in db.results
+                    on rac.raceId equals res.raceId
+                    where res.driverId == dri.driverId
+                    select rac;
+
+            return PartialView("_GridRace", q.ToList());
+        }
 
 
 

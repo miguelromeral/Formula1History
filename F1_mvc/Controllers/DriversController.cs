@@ -36,34 +36,42 @@ namespace F1_mvc.Controllers
             if(r == null)
                 throw new HttpException(404, "The driver "+id+" requested is not in the database.");
 
-            Dictionary<string, int> stats = new Dictionary<string, int>();
+            List<object> stats = new List<object>();
+            stats.Add(r);
 
             var seasons = Classes.Queries.GetSeasonsCount(db, id);
-            stats.Add("Seasons", seasons);
+            stats.Add(seasons);
 
             int races = db.results.Where(x => x.driverId == id).Count();
-            stats.Add("Races", races);
+            stats.Add(races);
 
             int poles = db.results.Where(x => x.driverId == id && x.grid == 1).Count();
-            stats.Add("Poles", poles);
+            stats.Add(poles);
 
             int fl = Classes.Queries.GetFastestLapCount(db, id);
-            stats.Add("Fastest Laps (TBF)", fl);
+            stats.Add(fl);
 
             int vic = db.results.Where(x => x.driverId == id && x.position == 1).Count();
-            stats.Add("Wins", vic);
+            stats.Add(vic);
             
             int cham = Classes.Queries.GetChampionshipCount(db, id);
-            stats.Add("Championships", cham);
+            stats.Add(cham);
 
             return PartialView("_Statistics", stats);
         }
-
-
+        
+        public PartialViewResult Races(string id)
+        {
+            var dri = GetDriverByRef(id);
+            if (dri == null)
+                throw new HttpException(404, "The driver " + id + " requested is not in the database.");
+            
+            return PartialView("_Testing");
+        }
 
         
 
-        private drivers GetDriverByRef(string reference)
+        internal static drivers GetDriverByRef(string reference)
         {
             if (reference == null || reference == "")
                 return null;
@@ -75,7 +83,7 @@ namespace F1_mvc.Controllers
             return d;
         }
 
-        private drivers GetDriverByRef(int? reference)
+        internal static drivers GetDriverByRef(int? reference)
         {
             if (reference == null)
                 return null;
