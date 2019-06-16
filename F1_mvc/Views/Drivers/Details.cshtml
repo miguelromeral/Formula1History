@@ -39,7 +39,9 @@
                 <td>@Model.nationality</td>
             </tr>
 
+            @Html.Action("Statistics", "Drivers", new { id = Model.driverId })
         </table>
+
 
     </div>
     <div class="col-lg-6">
@@ -56,7 +58,7 @@
 @section scripts{
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="text/javascript">
         
         $(document).ready(function () {
@@ -97,7 +99,7 @@
                 });
         }
 
-    </script>
+    </script>*@
 
 
 }

@@ -56,6 +56,9 @@
 
 @section googlemaps {
 
+    @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/bundles/jqueryval")
 
     <style>
         #map_canvas img {
@@ -68,7 +71,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            
+
             var lat = @Model.lat.ToString().Replace(',', '.');
             var lng = @Model.lng.ToString().Replace(',', '.');
 

@@ -128,6 +128,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Classes\Queries.cs" />
     <Compile Include="Controllers\CircuitsController.cs" />
     <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -207,6 +208,8 @@
     <Content Include="Views\Circuits\Details.cshtml" />
     <Content Include="Views\Drivers\Index.cshtml" />
     <Content Include="Views\Drivers\Details.cshtml" />
+    <Content Include="Views\Drivers\_Statistics.cshtml" />
+    <Content Include="Views\Shared\_Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

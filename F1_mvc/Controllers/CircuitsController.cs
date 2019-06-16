@@ -20,13 +20,11 @@ namespace F1_mvc.Controllers
         public ActionResult Details(string id)
         {
             if (id == null || id == "")
-                return RedirectToAction("Index");
-                //throw new HttpException(404, "The track "+circuitref+" requested is not in the database.");
+                throw new HttpException(404, "The track "+id+" requested is not in the database.");
 
             circuits r = db.circuits.Where(x => x.circuitRef == id).FirstOrDefault();
             if(r == null)
-                return RedirectToAction("Index");
-            //throw new HttpException(404, "The track "+circuitref+" requested is not in the database.");
+                throw new HttpException(404, "The track "+id+" requested is not in the database.");
 
             ViewBag.Title = r.name;
 
