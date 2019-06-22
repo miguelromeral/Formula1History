@@ -11,23 +11,37 @@
     <p class="lead">The drivers who have been on a F1 race ever.place.</p>
 </div>
 
-<table class="table table-hover" id="tableDrivers">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">Driver</th>
-            <th scope="col">@Html.DisplayNameFor(model => model.nationality)</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-        <tr scope="row">
-            <td>@Html.ActionLink(item.forename +" "+ item.surname, "details", "drivers", new { id = item.driverRef }, null)</td>
-            <td>@item.nationality</td>
-        </tr>
-        }
-    </tbody>
-</table>
+<div class="container">
+
+    <div class="col-sm-1"></div>
+    <div class="col-lg-10">
+
+        <table class="table table-hover" id="tableDrivers">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Driver</th>
+                    <th scope="col">@Html.DisplayNameFor(model => model.nationality)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr scope="row">
+                        <td>@Html.ActionLink(item.forename + " " + item.surname, "details", "drivers", new { id = item.driverRef }, null)</td>
+                        <td>@item.nationality</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-sm-1"></div>
+
+
+</div>
+
+
+
 
 @section scripts {
 

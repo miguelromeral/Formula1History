@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using F1_mvc.Models.GUI;
 
 namespace F1_mvc.Controllers
 {
@@ -23,41 +24,21 @@ namespace F1_mvc.Controllers
             var r = GetDriverByRef(id);
             if(r == null)
                 throw new HttpException(404, "The driver "+id+" requested is not in the database.");
-
-
-                ViewBag.Title = r.forename + " " + r.surname;
-
-            return View(r);
-        }
-
-        public PartialViewResult Statistics(int id)
-        {
-            var r = GetDriverByRef(id);
-            if(r == null)
-                throw new HttpException(404, "The driver "+id+" requested is not in the database.");
-
-            List<object> stats = new List<object>();
-            stats.Add(r);
-
-            var seasons = Classes.Queries.GetSeasonsCount(db, id);
-            stats.Add(seasons);
-
-            int races = db.results.Where(x => x.driverId == id).Count();
-            stats.Add(races);
-
-            int poles = db.results.Where(x => x.driverId == id && x.grid == 1).Count();
-            stats.Add(poles);
-
-            int fl = Classes.Queries.GetFastestLapCount(db, id);
-            stats.Add(fl);
-
-            int vic = db.results.Where(x => x.driverId == id && x.position == 1).Count();
-            stats.Add(vic);
             
-            int cham = Classes.Queries.GetChampionshipCount(db, id);
-            stats.Add(cham);
+            DriverModel model = new DriverModel()
+            {
+                Driver = r,
+                Seasons = Classes.Queries.GetSeasonsCount(db, r.driverId),
+                Races = db.results.Where(x => x.driverId == r.driverId).Count(),
+                Poles = db.results.Where(x => x.driverId == r.driverId && x.grid == 1).Count(),
+                FastestLaps = Classes.Queries.GetFastestLapCount(db, r.driverId),
+                Wins = db.results.Where(x => x.driverId == r.driverId && x.position == 1).Count(),
+                Championships = Classes.Queries.GetChampionshipCount(db, r.driverId),
+            };
 
-            return PartialView("_Statistics", stats);
+            ViewBag.Title = model.GetDriverFullname();
+
+            return View(model);
         }
         
         public PartialViewResult Races(string id)
@@ -70,6 +51,8 @@ namespace F1_mvc.Controllers
         }
 
         
+
+
 
         internal static drivers GetDriverByRef(string reference)
         {

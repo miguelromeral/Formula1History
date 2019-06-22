@@ -81,10 +81,46 @@ namespace F1_mvc.Controllers
                     join res in db.results
                     on rac.raceId equals res.raceId
                     where res.driverId == dri.driverId
+                    orderby rac.year ascending, rac.round ascending
                     select rac;
 
             return PartialView("_GridRace", q.ToList());
         }
+
+        [ActionName("GridPolesDriver")]
+        public PartialViewResult GridPoles(string id)
+        {
+            var dri = DriversController.GetDriverByRef(id);
+            if (dri == null)
+                throw new HttpException(404, "The driver " + id + " requested is not in the database.");
+            
+            var q = from rac in db.races
+                    join res in db.results
+                    on rac.raceId equals res.raceId
+                    where res.driverId == dri.driverId && res.grid == 1
+                    orderby rac.year ascending, rac.round ascending
+                    select rac;
+            
+            return PartialView("_GridRace", q.ToList());
+        }
+
+        [ActionName("GridWinsDriver")]
+        public PartialViewResult GridWins(string id)
+        {
+            var dri = DriversController.GetDriverByRef(id);
+            if (dri == null)
+                throw new HttpException(404, "The driver " + id + " requested is not in the database.");
+            
+            var q = from rac in db.races
+                    join res in db.results
+                    on rac.raceId equals res.raceId
+                    where res.driverId == dri.driverId && res.position == 1
+                    orderby rac.year ascending, rac.round ascending
+                    select rac;
+            
+            return PartialView("_GridRace", q.ToList());
+        }
+
 
 
 

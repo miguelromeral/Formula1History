@@ -1,5 +1,6 @@
 ﻿@using F1_mvc.Models
-@model drivers
+@using F1_mvc.Models.GUI
+@model DriverModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +8,7 @@
 
 <div class="text-center">
     <h1>
-        @(Model.forename + " " + Model.surname)
+        @(Model.GetDriverFullname())
     </h1>
 </div>
 
@@ -19,27 +20,92 @@
             <tr>
                 <td>Fullname</td>
                 <td>
-                    <a href="@Model.url">@ViewBag.Title</a>
+                    <a href="@Model.Driver.url">@ViewBag.Title</a>
                 </td>
             </tr>
             <tr>
-                <td>@Html.DisplayNameFor(model => model.number)</td>
-                <td>@Model.number</td>
+                <td>@Html.DisplayNameFor(model => model.Driver.number)</td>
+                <td>@Model.Driver.number</td>
             </tr>
             <tr>
-                <td>@Html.DisplayNameFor(model => model.code)</td>
-                <td>@Model.code</td>
+                <td>@Html.DisplayNameFor(model => model.Driver.code)</td>
+                <td>@Model.Driver.code</td>
             </tr>
             <tr>
-                <td>@Html.DisplayNameFor(model => model.dob)</td>
-                <td>@Model.dob</td>
+                <td>@Html.DisplayNameFor(model => model.Driver.dob)</td>
+                <td>@Model.Driver.dob</td>
             </tr>
             <tr>
-                <td>@Html.DisplayNameFor(model => model.nationality)</td>
-                <td>@Model.nationality</td>
+                <td>@Html.DisplayNameFor(model => model.Driver.nationality)</td>
+                <td>@Model.Driver.nationality</td>
             </tr>
+            <tr>
+                <td>Seasons</td>
+                <td>@Model.Seasons</td>
+            </tr>
+            <tr>
+                <td>Races</td>
+                <td>
+                    @Ajax.ActionLink(Model.Races.ToString(),
+                            "GridRaceDriver",
+                            "races",
+                            new { id = Model.Driver.driverRef },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                OnBegin = "clearDetails",
+                                UpdateTargetId = "details",
+                                InsertionMode = InsertionMode.Replace,
+                                OnSuccess = "afterLoadRaces()",
+                                LoadingElementId = "loading"
+                            })
+                </td>
 
-            @Html.Action("Statistics", "Drivers", new { id = Model.driverId })
+            </tr>
+            <tr>
+                <td>Poles</td>
+                <td>
+                    @Ajax.ActionLink(Model.Poles.ToString(),
+                            "GridPolesDriver",
+                            "races",
+                            new { id = Model.Driver.driverRef },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                OnBegin = "clearDetails",
+                                UpdateTargetId = "details",
+                                InsertionMode = InsertionMode.Replace,
+                                OnSuccess = "afterLoadRaces()",
+                                LoadingElementId = "loading"
+                            })
+                </td>
+            </tr>
+            <tr>
+                <td>Fastest Laps (TBF)</td>
+                <td>@Model.FastestLaps</td>
+            </tr>
+            <tr>
+                <td>Wins</td>
+                <td>
+                    @Ajax.ActionLink(Model.Wins.ToString(),
+                                        "GridWinsDriver",
+                                        "races",
+                                        new { id = Model.Driver.driverRef },
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "GET",
+                                            OnBegin = "clearDetails",
+                                            UpdateTargetId = "details",
+                                            InsertionMode = InsertionMode.Replace,
+                                            OnSuccess = "afterLoadRaces()",
+                                            LoadingElementId = "loading"
+                                        })
+                            </td>
+            </tr>
+            <tr>
+                <td>Championships</td>
+                <td>@Model.Championships</td>
+            </tr>
         </table>
 
 
@@ -54,12 +120,14 @@
 
 
 
-        <div id="details" width="100%" height="500">
+        <div id="detailsPanel" width="100%" height="500">
 
-            <div id="imgloader" style="display:none;position:absolute;top:50%;left:50%;padding:2px;">
+            <div id="loading" style="display:none;position:absolute;top:50%;left:50%;padding:2px;">
                 <img src="~/images/219.svg" />
             </div>
 
+            <div id="details">
+            </div>
 
         </div>
 
@@ -85,6 +153,10 @@
 
 
     <script type="text/javascript">
+
+        function clearDetails() {
+            $("#details").empty();
+        }
 
         function afterLoadRaces() {
             $('#tableRaces').DataTable({

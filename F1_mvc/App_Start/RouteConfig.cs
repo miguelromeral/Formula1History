@@ -14,15 +14,15 @@ namespace F1_mvc
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Drivers",
+                url: "drivers/{id}",
+                defaults: new { controller = "Drivers", action = "Details" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
-            );
-            routes.MapRoute(
-                name: "CircuitDetails",
-                url: "circuit/details/{circuitref}",
-                defaults: new { controller = "Circuit", action = "Details" },
-                constraints: new { circuitref = "[a-zA-Z]+" }
             );
         }
     }
