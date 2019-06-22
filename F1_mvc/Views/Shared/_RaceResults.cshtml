@@ -1,0 +1,27 @@
+﻿@model F1_mvc.Models.GUI.GrandPrixModel
+
+<h3>Race Results</h3>
+
+@{ 
+    int i = 1;
+}
+
+<table class="table table-hover" id="tableDrivers">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Pos.</th>
+            <th scope="col">Driver</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.GetDriverOrderByRacePosition)
+        {
+        <tr scope="row">
+            <td>@i</td>
+            <td>@Html.ActionLink(item.forename + " " + item.surname, "details", "drivers", new { id = item.driverRef }, null)</td>
+        </tr>
+        i++;
+        }
+    </tbody>
+</table>
+

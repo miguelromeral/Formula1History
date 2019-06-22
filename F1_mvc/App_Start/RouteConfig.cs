@@ -20,6 +20,12 @@ namespace F1_mvc
             );
 
             routes.MapRoute(
+                name: "Races",
+                url: "races/{id}",
+                defaults: new { controller = "Races", action = "Details" }
+            );
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }

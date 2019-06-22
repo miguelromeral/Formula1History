@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using F1_mvc.Models.GUI;
 
 namespace F1_mvc.Controllers
 {
@@ -21,47 +22,22 @@ namespace F1_mvc.Controllers
 
         public ActionResult Details(int id)
         {
-            var r = GetRaceByID(id);
-            if (r == null)
+            GrandPrixModel gp = new GrandPrixModel(id, ref db);
+            if (gp.Race == null)
                 throw new HttpException(404, "The race " + id + " requested is not in the database.");
             
-            ViewBag.Title = r.year +" "+ r.name;
+            ViewBag.Title = gp.Race.year +" "+ gp.Race.name;
+            
 
-            return View(r);
+            return View(gp);
         }
+        
 
-
-        public PartialViewResult RaceDetails(int id)
+        public PartialViewResult RaceResults(GrandPrixModel gp)
         {
-            var r = GetRaceByID(id);
-            if (r == null)
-                throw new HttpException(404, "The race " + id + " requested is not in the database.");
-
-            Dictionary<string, object> stats = new Dictionary<string, object>();
-
-
-            //var query = from res in db.results
-            //            join dri in db.drivers on res.driverId equals dri.driverId
-            //            select dri;
-
-
-            var q = from res in db.results
-                    join dri in db.drivers
-                    on res.driverId equals dri.driverId
-                    where res.raceId == id
-                    select dri;
-
-
-            var d = q.FirstOrDefault();
-            if (d != null)
-            {
-                stats.Add("Winner", d);
-            }
-
-
-
-            return PartialView("_RaceDetails", stats);
+            return PartialView("_RaceResults", gp);
         }
+
 
         
         [ActionName("GridRace")]
@@ -120,22 +96,6 @@ namespace F1_mvc.Controllers
             
             return PartialView("_GridRace", q.ToList());
         }
-
-
-
-
-
-        private races GetRaceByID(int? id)
-        {
-            if (id == null)
-                return null;
-
-            races d = db.races.Where(x => x.raceId == id).FirstOrDefault();
-            if (d == null)
-                return null;
-
-            return d;
-        }
-
+        
     }
 }

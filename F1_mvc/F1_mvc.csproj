@@ -151,6 +151,7 @@
     <Compile Include="Models\Database\seasons.cs" />
     <Compile Include="Models\Database\status.cs" />
     <Compile Include="Models\GUI\DriverModel.cs" />
+    <Compile Include="Models\GUI\GrandPrixModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -218,6 +219,7 @@
     <Content Include="Views\Shared\_RaceDetails.cshtml" />
     <Content Include="Views\Shared\_Testing.cshtml" />
     <Content Include="Views\Shared\_GridRace.cshtml" />
+    <Content Include="Views\Shared\_RaceResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

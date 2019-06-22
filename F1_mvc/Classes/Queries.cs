@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using F1_mvc.Models;
 
-namespace F1_mvc.Classes
+namespace F1_mvc.Models
 {
     public static class Queries
     {
@@ -23,6 +23,11 @@ namespace F1_mvc.Classes
                 , id);
 
             return db.Database.SqlQuery<int>(s).FirstOrDefault();
+        }
+
+        public static int GetRacesCount(ModelF1 db, int driverId)
+        {
+            return db.results.Where(x => x.driverId == driverId).Count();
         }
 
 
@@ -65,5 +70,46 @@ namespace F1_mvc.Classes
             return db.Database.SqlQuery<int>(s).FirstOrDefault();
         }
 
+
+
+
+        public static races GetRaceByID(int? id, ModelF1 db)
+        {
+            if (id == null)
+                return null;
+            
+            return db.races.Where(x => x.raceId == id).FirstOrDefault();
+        }
+
+        public static List<drivers> GetDriversInRace(int id, ModelF1 db)
+        {
+            var q = from dri in db.drivers
+                    join res in db.results
+                    on dri.driverId equals res.driverId
+                    where res.raceId == id
+                    select dri;
+
+            return q.ToList();
+        }
+
+
+        public static List<results> GetResultsInRace(int id, ModelF1 db)
+        {
+            var q = from res in db.results
+                    where res.raceId == id
+                    select res;
+
+            return q.ToList();
+        }
+
+        public static drivers GetDriverInRaceByPos(List<drivers> drivers, List<results> results, int pos)
+        {
+            var q = from dri in drivers
+                    join res in results
+                    on dri.driverId equals res.driverId
+                    where res.position == pos
+                    select dri;
+            return q.FirstOrDefault();
+        }
     }
 }

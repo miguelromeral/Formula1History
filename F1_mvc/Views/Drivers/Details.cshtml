@@ -14,7 +14,7 @@
 
 
 <div class="container">
-    <div class="col-lg-6">
+    <div class="col-lg-6 row">
 
         <table class="table table-hover">
             <tr>
@@ -56,7 +56,7 @@
                                 OnBegin = "clearDetails",
                                 UpdateTargetId = "details",
                                 InsertionMode = InsertionMode.Replace,
-                                OnSuccess = "afterLoadRaces()",
+                                OnSuccess = "afterLoadDetails('Races')",
                                 LoadingElementId = "loading"
                             })
                 </td>
@@ -75,7 +75,7 @@
                                 OnBegin = "clearDetails",
                                 UpdateTargetId = "details",
                                 InsertionMode = InsertionMode.Replace,
-                                OnSuccess = "afterLoadRaces()",
+                                OnSuccess = "afterLoadDetails('Poles')",
                                 LoadingElementId = "loading"
                             })
                 </td>
@@ -97,7 +97,7 @@
                                             OnBegin = "clearDetails",
                                             UpdateTargetId = "details",
                                             InsertionMode = InsertionMode.Replace,
-                                            OnSuccess = "afterLoadRaces()",
+                                            OnSuccess = "afterLoadDetails('Wins')",
                                             LoadingElementId = "loading"
                                         })
                             </td>
@@ -120,11 +120,13 @@
 
 
 
-        <div id="detailsPanel" width="100%" height="500">
+        <div id="detailsPanel" width="100%" height="400">
 
             <div id="loading" style="display:none;position:absolute;top:50%;left:50%;padding:2px;">
                 <img src="~/images/219.svg" />
             </div>
+
+            <h2 id="detailsTitle"></h2>
 
             <div id="details">
             </div>
@@ -156,13 +158,16 @@
 
         function clearDetails() {
             $("#details").empty();
+            $("#detailsTitle").empty();
         }
 
-        function afterLoadRaces() {
+        function afterLoadDetails(title) {
             $('#tableRaces').DataTable({
                 "pagingType": "simple",
                 "order": [[3, "asc"]]
             });
+
+            $("#detailsTitle").html(title);
         }
 
 

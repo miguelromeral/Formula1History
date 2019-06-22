@@ -28,12 +28,12 @@ namespace F1_mvc.Controllers
             DriverModel model = new DriverModel()
             {
                 Driver = r,
-                Seasons = Classes.Queries.GetSeasonsCount(db, r.driverId),
-                Races = db.results.Where(x => x.driverId == r.driverId).Count(),
+                Seasons = Queries.GetSeasonsCount(db, r.driverId),
+                Races = Queries.GetRacesCount(db, r.driverId),
                 Poles = db.results.Where(x => x.driverId == r.driverId && x.grid == 1).Count(),
-                FastestLaps = Classes.Queries.GetFastestLapCount(db, r.driverId),
+                FastestLaps = Queries.GetFastestLapCount(db, r.driverId),
                 Wins = db.results.Where(x => x.driverId == r.driverId && x.position == 1).Count(),
-                Championships = Classes.Queries.GetChampionshipCount(db, r.driverId),
+                Championships = Queries.GetChampionshipCount(db, r.driverId),
             };
 
             ViewBag.Title = model.GetDriverFullname();

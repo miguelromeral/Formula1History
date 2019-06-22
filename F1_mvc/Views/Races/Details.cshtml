@@ -1,5 +1,6 @@
 ﻿@using F1_mvc.Models
-@model races
+@using F1_mvc.Models.GUI
+@model GrandPrixModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,46 +12,53 @@
 
 
 <div class="container">
-    <div class="col-lg-6">
+    <div class="col-md-4">
+
+
 
         <table class="table table-hover">
-                    @*<tr>
-                        <td>Fullname</td>
-                        <td>
-                            <a href="@Model.url">@ViewBag.Title</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayNameFor(model => model.number)</td>
-                        <td>@Model.number</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayNameFor(model => model.code)</td>
-                        <td>@Model.code</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayNameFor(model => model.dob)</td>
-                        <td>@Model.dob</td>
-                    </tr>
-                    <tr>
-                        <td>@Html.DisplayNameFor(model => model.nationality)</td>
-                        <td>@Model.nationality</td>
-                    </tr>*@
 
-                @Html.Action("RaceDetails", "Races", new { id = Model.raceId })
-
-                </table>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Winner)</td>
+                <td>
+                    @Html.ActionLink(Model.Winner.forename + " " + Model.Winner.surname,
+               "details", "drivers", new { id = (Model.Winner.driverRef) }, null)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Second)</td>
+                <td>
+                    @Html.ActionLink(Model.Second.forename + " " + Model.Second.surname,
+               "details", "drivers", new { id = (Model.Second.driverRef) }, null)
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Third)</td>
+                <td>
+                    @Html.ActionLink(Model.Third.forename + " " + Model.Third.surname,
+               "details", "drivers", new { id = (Model.Third.driverRef) }, null)
+                </td>
+            </tr>
 
 
 
-
-            </div>
-            <div class="col-lg-6">
-            </div>
+        </table>
 
 
-        </div>
 
-        @section scripts{
 
-        }
+    </div>
+    <div class="col-md-4">
+
+        @Html.Action("RaceResults", "Races", new { gp = Model })
+
+    </div>
+    <div class="col-md-4">
+    </div>
+
+
+</div>
+
+@section scripts{
+
+}
