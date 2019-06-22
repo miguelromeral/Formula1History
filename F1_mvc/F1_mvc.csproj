@@ -132,6 +132,7 @@
     <Compile Include="Classes\Queries.cs" />
     <Compile Include="Classes\Utilities.cs" />
     <Compile Include="Controllers\CircuitsController.cs" />
+    <Compile Include="Controllers\ConstructorsController.cs" />
     <Compile Include="Controllers\DriversController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RacesController.cs" />
@@ -224,6 +225,8 @@
     <Content Include="Views\Shared\_Testing.cshtml" />
     <Content Include="Views\Shared\_GridRace.cshtml" />
     <Content Include="Views\Shared\_RaceResults.cshtml" />
+    <Content Include="Views\Constructors\Index.cshtml" />
+    <Content Include="Views\Shared\_GridConstructors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

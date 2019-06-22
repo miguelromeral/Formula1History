@@ -1,0 +1,33 @@
+﻿<div class="jumbotron">
+    <h1><img src="~/images/streamline-icon-sports-car-convertible@48x48.png" class="d-inline-block" />@ViewBag.Title</h1>
+    <p class="lead">All the manufactorers that F1 has had so far.</p>
+</div>
+
+
+@Html.Action("GridConstructors", "Constructors")
+
+
+
+@section scripts {
+
+    @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+
+        // Basic example
+        $(document).ready(function () {
+            $('#tableConstructors').DataTable({
+                "pagingType": "full_numbers", // "simple" option for 'Previous' and 'Next' buttons only
+                "order": [[1, "asc"]]
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+
+}

@@ -1,0 +1,22 @@
+﻿@using F1_mvc.Models
+@model IEnumerable<constructors>
+
+
+<table class="table table-hover" id="tableConstructors">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">@Html.DisplayNameFor(model => model.name)</th>
+            <th scope="col">@Html.DisplayNameFor(model => model.nationality)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr scope="row">
+                <td>@Html.ActionLink(item.name, "details", "constructors", new { id = item.constructorRef }, null)</td>
+                <td>@item.nationality</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
