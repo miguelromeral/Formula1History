@@ -9,6 +9,7 @@ namespace F1_mvc.Models.GUI
     {
         public constructors Constructor { get; set; }
 
+        public int Races { get; set; }
 
     }
 }

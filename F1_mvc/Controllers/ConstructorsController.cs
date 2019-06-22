@@ -27,7 +27,8 @@ namespace F1_mvc.Controllers
 
             ConstructorModel model = new ConstructorModel()
             {
-                Constructor = cons
+                Constructor = cons,
+                Races = Queries.GetRacesByConstructorId(cons.constructorId, db).Count()
             };
             
             ViewBag.Title = cons.name;

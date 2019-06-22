@@ -95,6 +95,18 @@ namespace F1_mvc.Controllers
             
             return PartialView("_GridRace", q.ToList());
         }
-        
+
+
+
+        [ActionName("GridRacesTeam")]
+        public PartialViewResult GridRacesTeam(string id)
+        {
+            var con = Queries.GetConstructorsById(id, db);
+            if (con == null)
+                throw new HttpException(404, "The driver " + id + " requested is not in the database.");
+
+            return PartialView("_GridRace", Queries.GetRacesByConstructorId(con.constructorId, db));
+        }
+
     }
 }

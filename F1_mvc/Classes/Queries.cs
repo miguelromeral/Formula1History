@@ -143,5 +143,21 @@ namespace F1_mvc.Models
         {
             return db.constructors.Where(x => x.constructorRef == reference).FirstOrDefault();
         }
+
+        public static List<races> GetRacesByConstructorId(int id, ModelF1 db)
+        {
+            return db.races.Join(db.results,
+                ra => ra.raceId,
+                re => re.raceId,
+                (ra, re) => new { ra, re.constructorId })
+                .Where(x => x.constructorId == id).Select(x => x.ra).Distinct()
+                .OrderBy(x => x.year).ThenBy(x => x.round).ToList();
+        }
+
+        public static List<races> GetRacesByConstructorId(string id, ModelF1 db)
+        {
+            return GetRacesByConstructorId(db.constructors.Where(x => x.constructorRef == id)
+                .Select(x => x.constructorId).FirstOrDefault(), db);
+        }
     }
 }

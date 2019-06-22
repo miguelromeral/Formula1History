@@ -27,6 +27,25 @@
                 <td>@Html.DisplayNameFor(model => model.Constructor.nationality)</td>
                 <td>@Model.Constructor.nationality</td>
             </tr>
+            <tr>
+                <td>Races (TBF)</td>
+                <td>
+                    @Ajax.ActionLink(Model.Races.ToString(),
+                            "GridRacesTeam",
+                            "races",
+                            new { id = Model.Constructor.constructorRef },
+                            new AjaxOptions
+                            {
+                                HttpMethod = "GET",
+                                OnBegin = "clearDetails",
+                                UpdateTargetId = "details",
+                                InsertionMode = InsertionMode.Replace,
+                                OnSuccess = "afterLoadDetails('Races')",
+                                LoadingElementId = "loading"
+                            })
+                </td>
+
+            </tr>
         </table>
 
 
