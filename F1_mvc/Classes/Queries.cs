@@ -136,5 +136,12 @@ namespace F1_mvc.Models
 
             return q.ToList();
         }
+
+
+
+        public static constructors GetConstructorsById(string reference, ModelF1 db)
+        {
+            return db.constructors.Where(x => x.constructorRef == reference).FirstOrDefault();
+        }
     }
 }

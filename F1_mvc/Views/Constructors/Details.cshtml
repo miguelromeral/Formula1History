@@ -1,0 +1,173 @@
+﻿@using F1_mvc.Models
+@using F1_mvc.Classes
+@using F1_mvc.Models.GUI
+@model ConstructorModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="text-center">
+
+    <h1><img src="~/images/streamline-icon-sports-car-convertible@24x24.png" class="d-inline-block" /> @ViewBag.Title</h1>
+</div>
+
+
+<div class="container">
+    <div class="col-lg-6 row">
+
+        <table class="table table-hover">
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Constructor.name)</td>
+                <td>
+                    <a href="@Model.Constructor.url">@Model.Constructor.name</a>
+                </td>
+            </tr>
+            <tr>
+                <td>@Html.DisplayNameFor(model => model.Constructor.nationality)</td>
+                <td>@Model.Constructor.nationality</td>
+            </tr>
+        </table>
+
+
+
+    </div>
+    <div class="col-lg-6" align="center">
+        @*<div id="picture" style="width: 100%; height: 500px; margin-bottom: 2px;">
+
+            </div>
+
+            <button id="bReload" lass="btn btn-primary btn-sm">Reload image</button>*@
+
+
+
+        <div id="detailsPanel" width="100%" height="400">
+
+            <div id="loading" style="display:none;position:absolute;top:50%;left:50%;padding:2px;">
+                <img src="~/images/219.svg" />
+            </div>
+
+            <h2 id="detailsTitle"></h2>
+
+            <div id="details">
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+    @Scripts.Render("~/Scripts/jquery-3.3.1.min.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
+
+    <script type="text/javascript">
+
+        function clearDetails() {
+            $("#details").empty();
+            $("#detailsTitle").empty();
+        }
+
+        function afterLoadDetails(title) {
+            $('#tableRaces').DataTable({
+                "pagingType": "simple",
+                "order": [[3, "asc"]]
+            });
+
+            $("#detailsTitle").html(title);
+        }
+
+
+        $(document).ready(function () {
+
+
+            $('#tableRaces').DataTable({
+                "pagingType": "simple", // "simple" option for 'Previous' and 'Next' buttons only
+                "order": [[4, "asc"]]
+            });
+
+
+            $("#slider").slider();
+
+            //$("#slider").slider({
+            //    min: 0,
+            //    max: 100,
+            //    step: 1,
+            //    values: [10, 90],
+            //    slide: function (event, ui) {
+            //        for (var i = 0; i < ui.values.length; ++i) {
+            //            $("input.sliderValue[data-index=" + i + "]").val(ui.values[i]);
+            //        }
+            //    }
+            //});
+
+            //$("input.sliderValue").change(function () {
+            //    var $this = $(this);
+            //    $("#slider").slider("values", $this.data("index"), $this.val());
+            //});
+        });
+
+    </script>
+
+
+
+
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                $('#bReaload').click(CallFlickrHere);
+                CallFlickrHere();
+            });
+
+            function CallFlickrHere() {
+                getImageFromFlickr('#picture', '@(String.Format("{0} {1}", Model.forename, Model.surname))');
+            }
+
+            function getImageFromFlickr(selector, keyword) {
+
+                $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+                    {
+                        sort: 'relevance',
+                        tags: keyword,
+                        tagmode: "all",
+                        format: "json"
+                    },
+                    function (data) {
+                        if (data.items.length != 0){
+
+                            var rnd = Math.floor(Math.random() * data.items.length);
+                            //var rnd = 0;
+
+                            var img = data.items[rnd]['media'];
+
+                            var image_src = data.items[rnd]['media']['m'].replace("_m", "_b");
+
+                            $(selector).css('background-image', "url('" + image_src + "')")
+                                .css('background-position', 'center')
+                                .css('background-repeat', 'no-repeat')
+                                .css('background-size', 'cover')
+                                .css('position', 'relative');
+
+                        }
+                    });
+            }
+
+        </script>*@
+
+
+}
