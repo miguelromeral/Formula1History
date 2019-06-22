@@ -17,6 +17,10 @@ namespace F1_mvc.Models.GUI
 
         public races Race { get; private set; }
         
+        public List<constructors> Constructors { get; private set; }
+
+        public List<status> Statuses { get; private set; }
+
         public GrandPrixModel(int id, ref ModelF1 db)
         {
             Race = Queries.GetRaceByID(id, db);
@@ -26,7 +30,10 @@ namespace F1_mvc.Models.GUI
 
             Drivers = Queries.GetDriversInRace(id, db);
             Results = Queries.GetResultsInRace(id, db);
-            
+            Constructors = Queries.GetConstructorsInRace(id, db);
+            Statuses = Queries.GetStatusesInRace(Results, id, db);
+
+
             //var q = from res in db.results
             //        join dri in db.drivers
             //        on res.driverId equals dri.driverId
@@ -68,6 +75,37 @@ namespace F1_mvc.Models.GUI
 
                 return q.ToList();
             }
+        }
+
+        public constructors GetConstructorsByDriverId(int id)
+        {
+            var q = from con in Constructors
+                    join res in Results
+                    on con.constructorId equals res.constructorId
+                    where res.driverId == id
+                    select con;
+
+            return q.FirstOrDefault();
+        }
+
+        public results GetResultsByDriverId(int id)
+        {
+            var q = from res in Results
+                    where res.driverId == id
+                    select res;
+
+            return q.FirstOrDefault();
+        }
+
+        public status GetStatusByDriverId(int id)
+        {
+            var q = from sta in Statuses
+                    join res in Results
+                    on sta.statusId equals res.statusId
+                    where res.driverId == id
+                    select sta;
+
+            return q.FirstOrDefault();
         }
     }
 }

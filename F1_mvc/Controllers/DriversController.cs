@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using F1_mvc.Models.GUI;
+using F1_mvc.Classes;
 
 namespace F1_mvc.Controllers
 {
@@ -36,7 +37,7 @@ namespace F1_mvc.Controllers
                 Championships = Queries.GetChampionshipCount(db, r.driverId),
             };
 
-            ViewBag.Title = model.GetDriverFullname();
+            ViewBag.Title = Utilities.Fullname(r);
 
             return View(model);
         }

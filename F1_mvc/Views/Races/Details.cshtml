@@ -7,7 +7,7 @@
 }
 
 <div class="text-center">
-    <h1>@ViewBag.Title</h1>
+    <h1><img src="~/images/streamline-icon-award-trophy-star-1@24x24.png" class="d-inline-block" /> @ViewBag.Title</h1>
 </div>
 
 
@@ -50,7 +50,6 @@
     </div>
     <div class="col-md-4">
 
-        @Html.Action("RaceResults", "Races", new { gp = Model })
 
     </div>
     <div class="col-md-4">
@@ -58,6 +57,16 @@
 
 
 </div>
+
+<div class="container">
+    <div class="col-lg-6">
+        @Html.Action("RaceResults", "Races", new { gp = Model })
+    </div>
+    <div class="col-lg-6">
+    </div>
+</div>
+
+
 
 @section scripts{
 

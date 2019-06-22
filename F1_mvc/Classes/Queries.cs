@@ -4,6 +4,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Web;
 using F1_mvc.Models;
+using F1_mvc.Classes;
 
 namespace F1_mvc.Models
 {
@@ -102,6 +103,18 @@ namespace F1_mvc.Models
             return q.ToList();
         }
 
+        public static List<constructors> GetConstructorsInRace(int id, ModelF1 db)
+        {
+            var q = (from res in db.results
+                    join con in db.constructors
+                    on res.constructorId equals con.constructorId
+                    where res.raceId == id
+                    select con).Distinct();
+
+            return q.ToList();
+        }
+
+
         public static drivers GetDriverInRaceByPos(List<drivers> drivers, List<results> results, int pos)
         {
             var q = from dri in drivers
@@ -109,7 +122,19 @@ namespace F1_mvc.Models
                     on dri.driverId equals res.driverId
                     where res.position == pos
                     select dri;
+
             return q.FirstOrDefault();
+        }
+
+        public static List<status> GetStatusesInRace(List<results> results, int id, ModelF1 db)
+        {
+            var q = (from res in results
+                     join sta in db.status
+                     on res.statusId equals sta.statusId
+                     where res.raceId == id
+                     select sta).Distinct();
+
+            return q.ToList();
         }
     }
 }

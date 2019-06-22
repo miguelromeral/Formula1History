@@ -21,13 +21,6 @@ namespace F1_mvc.Models.GUI
         public int Wins { get; set; }
 
         public int Championships { get; set; }
-
-
-        public string GetDriverFullname()
-        {
-            if (Driver == null)
-                return "Unknown";
-            return Driver.forename + " " + Driver.surname;
-        }
+        
     }
 }

@@ -32,7 +32,6 @@ namespace F1_mvc.Controllers
             return View(gp);
         }
         
-
         public PartialViewResult RaceResults(GrandPrixModel gp)
         {
             return PartialView("_RaceResults", gp);
