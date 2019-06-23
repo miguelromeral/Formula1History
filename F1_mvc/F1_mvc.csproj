@@ -229,6 +229,7 @@
     <Content Include="Views\Constructors\Index.cshtml" />
     <Content Include="Views\Shared\_GridConstructors.cshtml" />
     <Content Include="Views\Constructors\Details.cshtml" />
+    <Content Include="Views\Shared\_QualyResults.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -159,5 +159,10 @@ namespace F1_mvc.Models
             return GetRacesByConstructorId(db.constructors.Where(x => x.constructorRef == id)
                 .Select(x => x.constructorId).FirstOrDefault(), db);
         }
+
+        public static List<qualifying> GetQualyByRaceId(int id, ModelF1 db)
+        {
+            return db.qualifying.Where(x => x.raceId == id).OrderBy(x => x.position).ToList();
+        }
     }
 }

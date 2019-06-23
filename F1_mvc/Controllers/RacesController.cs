@@ -37,6 +37,12 @@ namespace F1_mvc.Controllers
             return PartialView("_RaceResults", gp);
         }
 
+        public PartialViewResult QualyResults(GrandPrixModel gp)
+        {
+            return PartialView("_QualyResults", gp);
+        }
+
+
 
         
         [ActionName("GridRace")]

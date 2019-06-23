@@ -21,6 +21,8 @@ namespace F1_mvc.Models.GUI
 
         public List<status> Statuses { get; private set; }
 
+        public List<qualifying> Qualy { get; private set; }
+
         public GrandPrixModel(int id, ref ModelF1 db)
         {
             Race = Queries.GetRaceByID(id, db);
@@ -32,6 +34,7 @@ namespace F1_mvc.Models.GUI
             Results = Queries.GetResultsInRace(id, db);
             Constructors = Queries.GetConstructorsInRace(id, db);
             Statuses = Queries.GetStatusesInRace(Results, id, db);
+            Qualy = Queries.GetQualyByRaceId(id, db);
 
 
             //var q = from res in db.results
@@ -62,6 +65,10 @@ namespace F1_mvc.Models.GUI
             return Queries.GetDriverInRaceByPos(Drivers, Results, pos);
         }
 
+        public drivers GetDriverById(int id)
+        {
+            return Drivers.Where(x => x.driverId == id).FirstOrDefault();
+        }
 
         public List<drivers> GetDriverOrderByRacePosition
         {
