@@ -164,5 +164,19 @@ namespace F1_mvc.Models
         {
             return db.qualifying.Where(x => x.raceId == id).OrderBy(x => x.position).ToList();
         }
+
+        public static lapTimes GetTrackRecordCircuit(int id, ModelF1 db)
+        {
+            var q = from lap in db.lapTimes
+                    join rac in db.races
+                    on lap.raceId equals rac.raceId
+                    join cir in db.circuits
+                    on rac.circuitId equals cir.circuitId
+                    where cir.circuitId == id
+                    orderby lap.milliseconds
+                    select lap;
+
+            return q.FirstOrDefault();
+        }
     }
 }

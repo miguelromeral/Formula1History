@@ -153,6 +153,7 @@
     <Compile Include="Models\Database\results.cs" />
     <Compile Include="Models\Database\seasons.cs" />
     <Compile Include="Models\Database\status.cs" />
+    <Compile Include="Models\GUI\CircuitModel.cs" />
     <Compile Include="Models\GUI\ConstructorModel.cs" />
     <Compile Include="Models\GUI\DriverModel.cs" />
     <Compile Include="Models\GUI\GrandPrixModel.cs" />

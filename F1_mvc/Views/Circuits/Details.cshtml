@@ -1,5 +1,6 @@
-﻿@using F1_mvc.Models
-@model circuits
+﻿@using F1_mvc.Models.GUI
+@using F1_mvc.Models
+@model CircuitModel
 
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,7 +9,7 @@
 <div class="text-center">
     <h1>
         <img src="~/images/streamline-icon-maps-pin@24x24.png" width="30" height="30" class="d-inline-block align-top" alt="" />
-        @Model.name
+        @Model.Circuit.name
     </h1>
 </div>
 
@@ -18,30 +19,30 @@
 
         <table class="table table-hover">
             <tr>
-                <td>@Html.DisplayNameFor(model => model.name)</td>
+                <td>@Html.DisplayNameFor(model => model.Circuit.name)</td>
                 <td>
-                    <a href="@Model.url">@Model.name</a>
+                    <a href="@Model.Circuit.url">@Model.Circuit.name</a>
                 </td>
             </tr>
             <tr>
-                <td>@Html.DisplayNameFor(model => model.location)</td>
-                <td>@Model.location</td>
+                <td>@Html.DisplayNameFor(model => model.Circuit.location)</td>
+                <td>@Model.Circuit.location</td>
             </tr>
             <tr>
-                <td>@Html.DisplayNameFor(model => model.country)</td>
-                <td>@Model.country</td>
+                <td>@Html.DisplayNameFor(model => model.Circuit.country)</td>
+                <td>@Model.Circuit.country</td>
             </tr>
             <tr>
-                <td>@Html.DisplayNameFor(model => model.lat)</td>
-                <td>@Model.lat</td>
+                <td>@Html.DisplayNameFor(model => model.Circuit.lat)</td>
+                <td>@Model.Circuit.lat</td>
             </tr>
             <tr>
-                <td>@Html.DisplayNameFor(model => model.lng)</td>
-                <td>@Model.lng</td>
+                <td>@Html.DisplayNameFor(model => model.Circuit.lng)</td>
+                <td>@Model.Circuit.lng</td>
             </tr>
             <tr>
-                <td>@Html.DisplayNameFor(model => model.alt)</td>
-                <td>@Model.alt</td>
+                <td>@Html.DisplayNameFor(model => model.TrackRecord)</td>
+                <td>@Model.TrackRecord.time</td>
             </tr>
 
         </table>
@@ -72,8 +73,8 @@
     <script type="text/javascript">
         $(document).ready(function () {
 
-            var lat = @Model.lat.ToString().Replace(',', '.');
-            var lng = @Model.lng.ToString().Replace(',', '.');
+            var lat = @Model.Circuit.lat.ToString().Replace(',', '.');
+            var lng = @Model.Circuit.lng.ToString().Replace(',', '.');
 
             Initialize(lat, lng);
         });
