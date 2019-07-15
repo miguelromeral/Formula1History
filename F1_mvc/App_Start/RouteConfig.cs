@@ -18,6 +18,18 @@ namespace F1_mvc
                 url: "drivers/{id}",
                 defaults: new { controller = "Drivers", action = "Details" }
             );
+            routes.MapRoute(
+                name: "Seasons",
+                url: "seasons/{id}",
+                defaults: new { controller = "Seasons", action = "Details" }
+            );
+
+
+            routes.MapRoute(
+                name: "Circuits",
+                url: "circuits/{id}",
+                defaults: new { controller = "Circuits", action = "Details" }
+            );
 
             routes.MapRoute(
                 name: "Races",

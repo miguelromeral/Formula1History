@@ -178,5 +178,30 @@ namespace F1_mvc.Models
 
             return q.FirstOrDefault();
         }
+
+        public static seasons GetSeasonByYear(int year, ModelF1 db)
+        {
+            return db.seasons.Where(x => x.year == year).FirstOrDefault();
+        }
+
+        public static drivers GetDriverChampionByYear(int year, ModelF1 db)
+        {
+            var s = String.Format(
+                @"select d.*
+                    from driverStandings as ds
+                    join (
+	                    select MAX(r.raceId) as max
+	                    from races as r
+	                    where r.year = {0}
+	                    ) as s
+                    on ds.raceId = s.max
+                    join drivers as d
+                    on ds.driverId = d.driverId
+                    where ds.position = 1"
+                , year);
+
+            return db.Database.SqlQuery<drivers>(s).FirstOrDefault();
+        }
+        
     }
 }

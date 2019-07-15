@@ -1,0 +1,23 @@
+﻿@using F1_mvc.Models
+@using F1_mvc.Models.GUI
+
+@model SeasonsModel
+
+<table class="table table-hover" id="tableseasons">
+    <thead class="thead-dark">
+        <tr>
+            <th scope="col">Year</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Seasons)
+        {
+        <tr scope="row">
+            <td>@Html.ActionLink(item.year.ToString(), "details", "Seasons", new { id = item.year }, null)</td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+
